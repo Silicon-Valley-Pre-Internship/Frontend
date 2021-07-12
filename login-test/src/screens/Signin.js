@@ -20,6 +20,8 @@ const Signin = ({navigation}) => {
         <Container>
             <StyledText>Signin</StyledText>
             <Button title="signup" onPress={() => navigation.navigate('Signup')} />
+            <Button title="MainScreen" onPress={() => navigation.navigate('MainScreen')} />
+            <Button title="Background" onPress={() => navigation.navigate('Background')} />
         </Container>
     );
 };
