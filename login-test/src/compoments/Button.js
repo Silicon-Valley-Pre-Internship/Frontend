@@ -18,11 +18,11 @@ const Title = styled.Text`
     color: ${({theme}) => theme.btnTitle};
 `;
 
-const Button = ({title, onPress}) => {
+const Button = ({title, onPress, containerStyle, textStyle}) => {
     return (
         <TouchableOpacity onPress={onPress}>
-            <Container>
-                <Title>{title}</Title>
+            <Container style={containerStyle}>
+                <Title style={textStyle}>{title}</Title>
             </Container>
         </TouchableOpacity>
     );
@@ -30,7 +30,9 @@ const Button = ({title, onPress}) => {
 
 Button.propTypes = {
     title: PropTypes.string.isRequired,
-    onPress: PropTypes.func.isRequired
+    onPress: PropTypes.func.isRequired,
+    containerStyle: PropTypes.object,
+    textStyle: PropTypes.object,
 };
 
 export default Button;
