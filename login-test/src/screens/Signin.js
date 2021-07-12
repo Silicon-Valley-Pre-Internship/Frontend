@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Button} from 'react-native';
+import {Button} from '../compoments';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Container = styled.View`
