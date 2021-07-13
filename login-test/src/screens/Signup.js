@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Button, Image, Input } from '../compoments';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { signup } from '../firebase';
+import { Alert } from 'react-native';
 
 const Container = styled.View`
   flex: 1;
@@ -14,7 +16,7 @@ const Container = styled.View`
 const DEFAULT_PHOTO =
     'https://firebasestorage.googleapis.com/v0/b/rn-chat-55bad.appspot.com/o/profile.png?alt=media';
 
-const Signup = () => {
+const Signup = ({navigation}) => {
 
     //useState를 이용해서 email, password 상태 변수를 만든다
     const [photo, setPhoto] = useState(DEFAULT_PHOTO);
@@ -27,8 +29,14 @@ const Signup = () => {
     const refPassword = useRef(null);
     const refPasswordConfirm = useRef(null);
 
-    const _handleSignupBtnPress = () => {
-        console.log('signup');
+    const _handleSignupBtnPress = async () => {
+        try{
+            const user = await signup({name, email, password, photo});
+            navigation.navigate('Profile', { user });
+        }
+        catch (e) {
+            Alert.alert('Signup Error', e.message);
+        }
     }
 
     return (
