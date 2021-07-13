@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { ThemeContext } from 'styled-components/native';
 import styled from 'styled-components';
-import {Button} from '../compoments';
+import { Button, Image } from '../compoments';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Container = styled.View`
@@ -19,12 +19,15 @@ const StyledText = styled.Text`
     color: #111111;
 `;
 
+const LOGO='https://firebasestorage.googleapis.com/v0/b/rn-chat-55bad.appspot.com/o/linist_logo.png?alt=media';
+
 const Signin = ({navigation}) => {
     const insets = useSafeAreaInsets();
     const theme = useContext(ThemeContext);
 
     return (
         <Container insets={insets}>
+            <Image url={LOGO} />
             <StyledText>Signin</StyledText>
             <Button title="sign in" onPress={() => console.log('signin')} />
             <Button 
