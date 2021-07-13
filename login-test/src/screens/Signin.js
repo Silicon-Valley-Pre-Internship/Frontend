@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { signin } from '../firebase';
 import { Alert } from 'react-native';
+import { validateEmail, removeWhitespace } from '../utils';
 
 const Container = styled.View`
   flex: 1;
@@ -27,6 +28,15 @@ const Signin = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const refPassword = useRef(null);
+
+    const _handleEmailChange = email => {
+        const changedEmail = removeWhitespace(email);
+        setEmail(changedEmail);
+    };
+
+    const _handlePasswordChange = password => {
+        setPassword(removeWhitespace(password));
+    };
 
     const _handleSigninBtnPress = async () => {
         try{
@@ -50,7 +60,7 @@ const Signin = ({navigation}) => {
                 placeholder="Email"
                 returnKeyType="next"
                 value={email}
-                onChangeText={setEmail}
+                onChangeText={_handleEmailChange}
                 onSubmitEditing={() => refPassword.current.focus()}
             />
             <Input
@@ -59,7 +69,7 @@ const Signin = ({navigation}) => {
                 placeholder="Password"
                 returnKeyType="done"
                 value={password}
-                onChangeText={setPassword}
+                onChangeText={_handlePasswordChange}
                 isPassword={true}
                 onSubmitEditing={_handleSigninBtnPress}
             />
