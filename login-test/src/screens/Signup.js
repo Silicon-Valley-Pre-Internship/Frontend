@@ -30,7 +30,7 @@ const Signup = () => {
     return (
         <KeyboardAwareScrollView extraScrollHeight={20}>
         <Container>
-            <Image />
+            <Image showButton={true}/>
             <Input
                 label="Name"
                 placeholder="Name"
