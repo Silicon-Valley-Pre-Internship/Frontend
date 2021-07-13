@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 
@@ -12,7 +12,7 @@ const Label = styled.Text`
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 6px;
-    color: ${({ theme }) => theme.inputLabel};
+    color: ${({ theme, isFocused }) => (isFocused ? theme.text : theme.inputLabel)};
 `;
 
 const StyledInput = styled.TextInput.attrs(({theme}) => ({
@@ -22,37 +22,54 @@ const StyledInput = styled.TextInput.attrs(({theme}) => ({
     color: ${({theme}) => theme.text};
     padding: 20px 10px;
     font-size: 16px;
-    border: 1px solid ${({theme}) => theme.inputBorder};
+    border: 1px solid ${({ theme , isFocused }) => (isFocused ? theme.text : theme.inputBorder)};
     border-radius: 10px;
 `;
 
-const Input = ({
-    label,
-    value,
-    onChangeText,
-    onSubmitEditing,
-    onBlur,
-    placeholder,
-    returnKeyType,
-    maxLength,
-}) => {
+const Input = forwardRef(
+(
+    {
+        label,
+        value,
+        onChangeText,
+        onSubmitEditing,
+        onBlur,
+        placeholder,
+        returnKeyType,
+        maxLength,
+    },
+    ref
+) => {
+    const [isFocused, setIsFocused] = useState(false);
+
     return (
         <Container>
-            <Label>{label}</Label>
+            <Label isFocused={isFocused}>{label}</Label>
             <StyledInput 
+                ref={ref}
                 value={value}
                 onChangeText={onChangeText}
                 onSubmitEditing={onSubmitEditing}
-                onBlur={onBlur}
+                onBlur={() => {
+                    setIsFocused(false);
+                    onBlur();
+                }}
                 placeholder={placeholder}
                 returnKeyType={returnKeyType}
                 maxLength={maxLength}
                 autoCapitalize="none"
                 autoCorrect={false}
                 textContentType="none"
+                isFocused={isFocused}
+                onFocus={() => setIsFocused(true)}
             />
         </Container>
     );
+}
+);
+
+Input.defaultProps = {
+    onBlur: () => {},
 };
 
 Input.propTypes = {
