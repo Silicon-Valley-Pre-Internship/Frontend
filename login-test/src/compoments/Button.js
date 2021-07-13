@@ -8,9 +8,11 @@ const Container = styled.View`
     background-color:  ${({theme}) => theme.btnBackground};
     padding: 10px;
     margin: 10px 0;
+    flex: 1;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    opacity: ${({disabled}) => (disabled ? 0.5 : 1)};
 `;
 
 const Title = styled.Text`
@@ -18,10 +20,14 @@ const Title = styled.Text`
     color: ${({theme}) => theme.btnTitle};
 `;
 
-const Button = ({title, onPress, containerStyle, textStyle}) => {
+const Button = ({ title, onPress, containerStyle, textStyle, disabled }) => {
     return (
-        <TouchableOpacity onPress={onPress}>
-            <Container style={containerStyle}>
+        <TouchableOpacity
+            onPress={onPress}
+            style={{flexDirection: 'row'}}
+            disabled={disabled}
+        >
+            <Container style={containerStyle} disabled={disabled}>
                 <Title style={textStyle}>{title}</Title>
             </Container>
         </TouchableOpacity>
@@ -33,6 +39,7 @@ Button.propTypes = {
     onPress: PropTypes.func.isRequired,
     containerStyle: PropTypes.object,
     textStyle: PropTypes.object,
+    disabled: PropTypes.bool,
 };
 
 export default Button;
