@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { ThemeContext } from 'styled-components/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Signin, Signup, MainScreen, Background } from '../screens';
+import { Signin, Signup, Profile, MainScreen, Background } from '../screens';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
@@ -34,6 +34,10 @@ const Auth = () => {
                         />
                     ),
                 }}
+            />
+            <Stack.Screen 
+                name="Profile"
+                component={Profile}
             />
             <Stack.Screen name="MainScreen" component={MainScreen} />
             <Stack.Screen name="Background" component={Background} />
