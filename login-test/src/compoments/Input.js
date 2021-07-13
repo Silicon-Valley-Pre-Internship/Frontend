@@ -37,6 +37,7 @@ const Input = forwardRef(
         placeholder,
         returnKeyType,
         maxLength,
+        isPassword,
     },
     ref
 ) => {
@@ -62,6 +63,7 @@ const Input = forwardRef(
                 textContentType="none"
                 isFocused={isFocused}
                 onFocus={() => setIsFocused(true)}
+                secureTextEntry={isPassword}
             />
         </Container>
     );
@@ -81,6 +83,7 @@ Input.propTypes = {
     placeholder: PropTypes.string,
     returnKeyType: PropTypes.oneOf(['done', 'next']),
     maxLength: PropTypes.number,
+    isPassword: PropTypes.bool,
 };
 
 export default Input;
