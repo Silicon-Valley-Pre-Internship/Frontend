@@ -11,9 +11,13 @@ const Container = styled.View`
   padding: 50px 20px;
 `;
 
+const DEFAULT_PHOTO =
+    'https://firebasestorage.googleapis.com/v0/b/rn-chat-55bad.appspot.com/o/profile.png?alt=media';
+
 const Signup = () => {
 
     //useState를 이용해서 email, password 상태 변수를 만든다
+    const [photo, setPhoto] = useState(DEFAULT_PHOTO);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -30,7 +34,7 @@ const Signup = () => {
     return (
         <KeyboardAwareScrollView extraScrollHeight={20}>
         <Container>
-            <Image showButton={true}/>
+            <Image showButton={true} url={photo} onChangePhoto={setPhoto} />
             <Input
                 label="Name"
                 placeholder="Name"
