@@ -10,7 +10,9 @@ const Auth = () => {
     const theme = useContext(ThemeContext);
 
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{
+            cardStyle: {backgroundColor: theme.Background },
+        }}>
             <Stack.Screen 
                 name="Signin"
                 component={Signin}
@@ -36,7 +38,6 @@ const Auth = () => {
             <Stack.Screen name="MainScreen" component={MainScreen} />
             <Stack.Screen name="Background" component={Background} />
         </Stack.Navigator>
-
     );
 };
 

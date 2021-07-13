@@ -1,20 +1,17 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Button, Image, Input } from '../compoments';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.background};
-  padding: 0 20px;
-  padding-top: ${({insets: {top}}) => top}px;
-  padding-bottom: ${({insets: {bottom}}) => bottom}px;
+  padding: 50px 20px;
 `;
 
 const Signup = () => {
-    const insets = useSafeAreaInsets();
 
     //useState를 이용해서 email, password 상태 변수를 만든다
     const [name, setName] = useState('');
@@ -31,7 +28,8 @@ const Signup = () => {
     }
 
     return (
-        <Container insets={insets}>
+        <KeyboardAwareScrollView extraScrollHeight={20}>
+        <Container>
             <Image />
             <Input
                 label="Name"
@@ -73,6 +71,7 @@ const Signup = () => {
             <Button title="sign up" onPress={_handleSignupBtnPress} />
             
         </Container>
+        </KeyboardAwareScrollView>
     );
 };
 
