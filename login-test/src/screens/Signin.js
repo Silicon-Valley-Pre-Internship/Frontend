@@ -1,7 +1,7 @@
 import React, { useContext, useState, useRef } from 'react';
 import { ThemeContext } from 'styled-components/native';
 import styled from 'styled-components';
-import { Button, Image, Input } from '../compoments';
+import { Button, Image, Input, ErrorMessage } from '../compoments';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { signin } from '../firebase';
@@ -27,11 +27,15 @@ const Signin = ({navigation}) => {
     //useState를 이용해서 email, password 상태 변수를 만든다
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const refPassword = useRef(null);
 
     const _handleEmailChange = email => {
         const changedEmail = removeWhitespace(email);
         setEmail(changedEmail);
+        setErrorMessage(
+            validateEmail(changedEmail) ? '' : 'Please verify your email'
+        );
     };
 
     const _handlePasswordChange = password => {
@@ -73,6 +77,7 @@ const Signin = ({navigation}) => {
                 isPassword={true}
                 onSubmitEditing={_handleSigninBtnPress}
             />
+            <ErrorMessage message={errorMessage} />
             <Button title="sign in" onPress={_handleSigninBtnPress} />
             <Button 
                 title="or sign up"
