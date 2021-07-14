@@ -1,6 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { View, Image, Text, Dimensions, Alert, StyleSheet } from "react-native";
+import {
+  View,
+  ScrollView,
+  Image,
+  Text,
+  Dimensions,
+  Alert,
+  StyleSheet,
+} from "react-native";
 import { TouchableHighlight } from "react-native-gesture-handler";
 
 const Container = styled.View`
@@ -74,7 +82,7 @@ class Mypage extends React.Component {
           양유진 님
         </Text>
 
-        <View style={{ flex: 1, flexDirection: "row", marginTop: 10 }}>
+        <View style={{ flexDirection: "row", marginTop: 10 }}>
           <View style={{ flex: 1, alignItems: "center", marginLeft: 20 }}>
             <Image
               source={require("../assets/profile1.png")}
@@ -122,7 +130,8 @@ class Mypage extends React.Component {
             </View>
           </TouchableHighlight>
         </View>
-        <View style={{ flex: 5 }}>{this.renderSection()}</View>
+
+        <ScrollView>{this.renderSection()}</ScrollView>
       </Container>
     );
   }
@@ -137,7 +146,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
-    margin: 8,
+    margin: 10,
   },
   button: {
     borderRadius: 5,
