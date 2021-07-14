@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import {Button} from 'react-native';
+import React from "react";
+import styled from "styled-components";
+import { Button } from "react-native";
 
 const Container = styled.View`
   flex: 1;
@@ -11,19 +11,25 @@ const Container = styled.View`
 `;
 
 const StyledText = styled.Text`
-    font-size: 30px;
-    color: #111111;
+  font-size: 30px;
+  color: #111111;
 `;
 
-const Signin = ({navigation}) => {
-    return (
-        <Container>
-            <StyledText>Signin</StyledText>
-            <Button title="signup" onPress={() => navigation.navigate('Signup')} />
-            <Button title="MainScreen" onPress={() => navigation.navigate('MainScreen')} />
-            <Button title="Background" onPress={() => navigation.navigate('Background')} />
-        </Container>
-    );
+const Signin = ({ navigation }) => {
+  return (
+    <Container>
+      <StyledText>Signin</StyledText>
+      <Button title="signup" onPress={() => navigation.navigate("Signup")} />
+      <Button
+        title="MainScreen"
+        onPress={() => navigation.navigate("MainScreen")}
+      />
+      <Button
+        title="Background"
+        onPress={() => navigation.navigate("Background")}
+      />
+    </Container>
+  );
 };
 
 export default Signin;
