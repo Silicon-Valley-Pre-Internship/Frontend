@@ -43,20 +43,26 @@ class Mypage extends React.Component {
   renderSectionOne = () => {
     return images.map((image, index) => {
       return (
-        <View
-          key={index}
-          style={[
-            { width: width / 3 },
-            { height: width / 3 },
-            index % 3 !== 0 ? { paddingLeft: 2 } : { paddingLeft: 0 },
-            { marginBottom: 2 },
-          ]}
+        <TouchableHighlight
+          //onPress={() => navigation.navigate("Signup")}
+          onPress={this.clickImage}
         >
-          <Image
-            style={{ flex: 1, width: undefined, height: undefined }}
-            source={image}
-          />
-        </View>
+          <View
+            key={index}
+            style={[
+              { width: width / 3 },
+              { height: width / 3 },
+              index % 3 !== 0 ? { paddingLeft: 2 } : { paddingLeft: 0 },
+              { marginBottom: 2 },
+            ]}
+          >
+            <Image
+              key={index}
+              style={{ flex: 1, width: undefined, height: undefined }}
+              source={image}
+            />
+          </View>
+        </TouchableHighlight>
       );
     });
   };
@@ -67,6 +73,10 @@ class Mypage extends React.Component {
         {this.renderSectionOne()}
       </View>
     );
+  };
+
+  clickImage = () => {
+    alert("clicked an image!");
   };
 
   render() {
