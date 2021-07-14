@@ -48,7 +48,7 @@ const Image = ({ url, showButton, onChangePhoto }) => {
             if (Platform.OS !== 'web') {
                 const {
                     status,
-                } = await ImagePicker.requestMediaLibraryPermissionAsync();
+                } = await ImagePicker.requestMediaLibraryPermissionsAsync();
                 if(status !== 'granted'){
                     Alert.alert(
                         'Photo Permission',
