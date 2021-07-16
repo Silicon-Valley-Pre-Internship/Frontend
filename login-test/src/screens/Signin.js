@@ -1,12 +1,13 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import { ThemeContext } from 'styled-components/native';
 import styled from 'styled-components';
-import { Button, Image, Input, ErrorMessage } from '../compoments';
+import { Button, Image, Input, ErrorMessage } from '../components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { signin } from '../firebase';
 import { Alert } from 'react-native';
 import { validateEmail, removeWhitespace } from '../utils';
+import { UserContext, ProgressContext } from '../contexts';
 
 const Container = styled.View`
   flex: 1;
@@ -23,6 +24,8 @@ const LOGO='https://firebasestorage.googleapis.com/v0/b/rn-chat-55bad.appspot.co
 const Signin = ({navigation}) => {
     const insets = useSafeAreaInsets();
     const theme = useContext(ThemeContext);
+    const { setUser } = useContext(UserContext);
+    const { spinner } = useContext(ProgressContext); //로그인을 시도하는 동안 spinner
 
     //useState를 이용해서 email, password 상태 변수를 만든다
     const [email, setEmail] = useState('');
@@ -49,11 +52,15 @@ const Signin = ({navigation}) => {
 
     const _handleSigninBtnPress = async () => {
         try{
+            spinner.start();
             const user = await signin({email, password});
-            navigation.navigate('Profile', { user });
+            setUser(user);
         }
         catch (e) {
             Alert.alert('Signin Error', e.message);
+        }
+        finally{
+            spinner.stop(); //로그인 성공 여부와 상관없이 spinner 사라져야 함
         }
     }
 

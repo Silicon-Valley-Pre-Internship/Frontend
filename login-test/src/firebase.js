@@ -36,7 +36,7 @@ const uploadImage = async uri => {
 
 export const signup = async ({name, email, password, photo}) => {
     const {user} = await Auth.createUserWithEmailAndPassword(email, password);
-    const photoUrl = await uploadImage(photo);
+    const photoURL = await uploadImage(photo);
     await user.updateProfile({displayName: name, photoURL});
     return user;
 };

@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { Button, ErrorMessage, Image, Input } from '../compoments';
+import { Button, ErrorMessage, Image, Input } from '../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { signup } from '../firebase';
 import { Alert } from 'react-native';
 import { validateEmail, removeWhitespace } from '../utils';
+import { UserContext, ProgressContext } from '../contexts';
 
 const Container = styled.View`
   flex: 1;
@@ -18,6 +19,8 @@ const DEFAULT_PHOTO =
     'https://firebasestorage.googleapis.com/v0/b/rn-chat-55bad.appspot.com/o/profile.png?alt=media';
 
 const Signup = ({navigation}) => {
+    const { setUser } = useContext(UserContext);
+    const { spinner } = useContext(ProgressContext);
 
     //useState를 이용해서 email, password 상태 변수를 만든다
     const [photo, setPhoto] = useState(DEFAULT_PHOTO);
@@ -63,11 +66,15 @@ const Signup = ({navigation}) => {
 
     const _handleSignupBtnPress = async () => {
         try{
+            spinner.start();
             const user = await signup({name, email, password, photo});
-            navigation.navigate('Profile', { user });
+            setUser(user);
         }
         catch (e) {
             Alert.alert('Signup Error', e.message);
+        }
+        finally{
+            spinner.stop();
         }
     }
 
