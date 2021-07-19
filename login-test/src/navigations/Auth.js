@@ -1,9 +1,13 @@
-import React from "react";
+
+import React, {useContext} from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
-import { Signin, Signup, MainScreen, Background, Mypage } from "../screens";
+import { Signin, Signup, MainScreen, Background, Mypage, Profile } from "../screens";
 import { Button } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import { ThemeContext } from 'styled-components/native';
+import { MaterialIcons } from '@expo/vector-icons';
+
 MainTab = () => {
   return (
     <Tab.Navigator
@@ -47,27 +51,54 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const Auth = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="On the Line" component={MainTab} />
-      <Stack.Screen name="Signin" component={Signin} />
-      <Stack.Screen name="Signup" component={Signup} />
-      <Stack.Screen name="MainScreen" component={MainScreen} />
-      <Stack.Screen
-        name="Background"
-        component={Background}
-        options={{
-          headerRight: () => (
-            <Button
-              onPress={() => alert("Upload")}
-              title="Upload"
-              color="#3778F5"
+    const theme = useContext(ThemeContext);
+
+    return (
+        <Stack.Navigator screenOptions={{
+            cardStyle: {backgroundColor: theme.Background },
+        }}>
+            <Stack.Screen 
+                name="Signin"
+                component={Signin}
+                options={{ headerShown: false}}
             />
-          ),
-        }}
-      />
-    </Stack.Navigator>
-  );
+            <Stack.Screen 
+                name="Signup"
+                component={Signup} 
+                options = {{
+                    headerTitleAlign: 'center',
+                    headerBackTitleVisible: false,
+                    headerTintColor: theme.text,
+                    headerLeft: ({onPress, tintColor}) => (
+                        <MaterialIcons 
+                            name="keyboard-arrow-left"
+                            size={38}
+                            color={tintColor}
+                            onPress={onPress}
+                        />
+                    ),
+                }}
+            />
+            <Stack.Screen 
+                name="Profile"
+                component={Profile}
+            />
+            <Stack.Screen name="MainScreen" component={MainScreen} />
+            <Stack.Screen name="Background"
+              component={Background} 
+              options={{
+                headerRight: () => (
+                  <Button
+                    onPress={() => alert("Upload")}
+                    title="Upload"
+                    color="#3778F5"
+                  />
+             ),
+           }}
+        />
+        </Stack.Navigator>
+    );
+
 };
 
 export default Auth;

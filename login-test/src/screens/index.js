@@ -1,7 +1,7 @@
-import Signin from "./Signin";
-import Signup from "./Signup";
-import MainScreen from "./MainScreen";
-import Background from "./Background";
-import Mypage from "./Mypage";
+import Signin from './Signin';
+import Signup from './Signup';
+import Profile from './Profile';
+import MainScreen from './MainScreen';
+import Background from './Background';
 
-export { Signin, Signup, MainScreen, Background, Mypage };
+export {Signin, Signup, Profile, MainScreen, Background, MyPage};
