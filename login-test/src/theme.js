@@ -1,6 +1,8 @@
 const Colors = {
     white: '#ffffff',
     black: '#111111',
+    pink: '#EF9DA9',
+    main2: '#3679fe',
     main: '#f6c1ce',
     grey_0: '#d5d5d5',
     grey_1: '#a6a6a6',
@@ -9,6 +11,8 @@ const Colors = {
 
 export const theme = {
     background: Colors.white,
+
+    background2: Colors.pink,
     text: Colors.black,
     errorText: Colors.red,
 

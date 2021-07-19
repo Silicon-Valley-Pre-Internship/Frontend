@@ -24,17 +24,15 @@ class Background extends React.Component{
     
     return (
           <View>
-            <Image source={require('../../assets/linedrawing_example.png')} style={{width: "100%", height: 350}} />
-            <View>
+            <Image source={require('../../assets/people.png')} style={{width: "100%", height: "93%"}} />
+            <View style={styles.container}>
               <Button 
                title="Select Image"
                style={styles.text}
                onPress={this._pickImage}
-               color="#707070"
+               color="#EF9DA9"
               />
             </View>
-            {image == null ? <View style={styles.container}/>:
-            <Image source={{ uri: image }} style={{width: "100%", height: 220}}/>}
           </View>  
      )
   }
@@ -43,13 +41,13 @@ class Background extends React.Component{
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 220,
-    backgroundColor: '#E6E6E6',
+    backgroundColor: 'white',
   },
 
   text: {
     textAlign: 'center',
     fontSize: 22,
+    fontWeight: 'bold',
   }
 });
 

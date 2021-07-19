@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MaterialIcons } from '@expo/vector-icons';
-import { View,StyleSheet, Text } from 'react-native';
+import { View,StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -19,6 +19,8 @@ const StyledText = styled.Text`
 `;
 class MainScreen extends React.Component {
     
+  
+  
     state = {
         image: null,
     }

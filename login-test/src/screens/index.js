@@ -4,4 +4,4 @@ import Profile from './Profile';
 import MainScreen from './MainScreen';
 import Background from './Background';
 
-export {Signin, Signup, Profile, MainScreen, Background};
+export {Signin, Signup, Profile, MainScreen, Background, MyPage};
