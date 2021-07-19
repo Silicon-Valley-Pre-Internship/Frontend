@@ -5,6 +5,8 @@ import { View,StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
+import Test from './Test';
+
 const Container = styled.View`
   flex: 1;
   justify-content: center;
@@ -18,7 +20,12 @@ const StyledText = styled.Text`
     color: #111111;
 `;
 class MainScreen extends React.Component {
-    
+    constructor(props){
+      super(props);
+      this.state={
+        url:''
+      };
+    }
   
   
     state = {
@@ -55,6 +62,15 @@ class MainScreen extends React.Component {
                  <TouchableHighlight onPress={this._pickImage} style={styles.button}>
                   <View style={styles.btnContainer}>
                   <Text style={styles.btnText}>Select Image</Text>
+                  </View>
+                  </TouchableHighlight>
+                  <Text style={styles.text1}></Text>
+                  <Text style={styles.text1}></Text>
+                  <TouchableHighlight onPress={() => this.props.navigation.navigate('Test',{
+                    url: this.state.image
+                  })} style={styles.button}>
+                  <View style={styles.btnContainer}>
+                  <Text style={styles.btnText}>Upload</Text>
                   </View>
                   </TouchableHighlight>
             </Container>

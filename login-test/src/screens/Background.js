@@ -27,7 +27,7 @@ class Background extends React.Component{
             <Image source={require('../../assets/people.png')} style={{width: "100%", height: "93%"}} />
             <View style={styles.container}>
               <Button 
-               title="Select Image"
+               title="Select Background"
                style={styles.text}
                onPress={this._pickImage}
                color="#EF9DA9"
