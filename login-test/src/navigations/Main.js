@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { MainScreen } from '../screens';
-
+import { MainScreen, Profile } from '../screens';
+import { Auth } from './Auth';
 const Stack = createStackNavigator();
 
 const Main = () => {
@@ -17,7 +17,9 @@ const Main = () => {
         cardStyle: { backgroundColor: theme.background },
       }}
     >
-      <Stack.Screen name="MainScreen" component={MainScreen} />
+      <Stack.Screen name="Welcome Linist" component={MainTab} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="MainScreen" component={MainScreen}/>
     </Stack.Navigator>
   );
 };

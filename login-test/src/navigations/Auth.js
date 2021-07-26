@@ -79,6 +79,7 @@ const Auth = () => {
                     ),
                 }}
             />
+            <Stack.Screen name="On the Line" component={MainTab} />
             <Stack.Screen 
                 name="Profile"
                 component={Profile}

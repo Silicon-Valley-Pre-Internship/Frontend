@@ -5,7 +5,8 @@ import { View,StyleSheet, Image, Button, Text, TouchableOpacity } from 'react-na
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
-import axios from 'axios'
+import axios from 'axios';
+import Test from './Test';
 const Container = styled.View`
   flex: 1;
   justify-content: center;
@@ -22,7 +23,7 @@ class MainScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: "",
+      url: '',
     };
   }
 
@@ -62,7 +63,7 @@ class MainScreen extends React.Component {
 
       //Post 처리
       await axios
-        .post("http://210.94.222.124:333/img_trans", formData, {
+        .post("http://172.22.218.143:333/img_trans", formData, {
           headers: {
             enctype: "multipart/form-data",
           },
