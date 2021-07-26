@@ -16,7 +16,7 @@ const Container = styled.View`
 `;
 
 const DEFAULT_PHOTO =
-    'https://firebasestorage.googleapis.com/v0/b/rn-chat-55bad.appspot.com/o/profile.png?alt=media';
+    'https://firebasestorage.googleapis.com/v0/b/linist-test.appspot.com/o/profile.png?alt=media';
 
 const Signup = ({navigation}) => {
     const { setUser } = useContext(UserContext);

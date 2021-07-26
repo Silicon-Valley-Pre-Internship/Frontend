@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Profile } from '../screens';
+import { MainScreen } from '../screens';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +17,7 @@ const Main = () => {
         cardStyle: { backgroundColor: theme.background },
       }}
     >
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="MainScreen" component={MainScreen} />
     </Stack.Navigator>
   );
 };

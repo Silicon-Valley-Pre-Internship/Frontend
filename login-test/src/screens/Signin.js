@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef, useEffect } from 'react';
 import { ThemeContext } from 'styled-components/native';
 import styled from 'styled-components';
 import { Button } from "react-native";
-import { Button, Image, Input, ErrorMessage } from '../components';
+import { Image, Input, ErrorMessage } from '../components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { signin } from '../firebase';
@@ -20,7 +20,7 @@ const Container = styled.View`
   padding-bottom: ${({insets: {bottom}}) => bottom}px;
 `;
 
-const LOGO='https://firebasestorage.googleapis.com/v0/b/rn-chat-55bad.appspot.com/o/linist_logo.png?alt=media';
+const LOGO='https://firebasestorage.googleapis.com/v0/b/linist-test.appspot.com/o/linist_logo.png?alt=media';
 
 const Signin = ({navigation}) => {
     const insets = useSafeAreaInsets();

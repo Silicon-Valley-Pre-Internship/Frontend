@@ -57,6 +57,10 @@ class MainScreen extends React.Component {
                   <Text style={styles.btnText}>Select Image</Text>
                   </View>
                   </TouchableHighlight>
+                  <View>
+                  <Text>{this.state.image}</Text>
+                  <Text>hi2</Text>
+                  </View>
             </Container>
         );
       }
