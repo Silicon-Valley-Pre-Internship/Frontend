@@ -1,7 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MaterialIcons } from '@expo/vector-icons';
-import { View,StyleSheet, Image, Button, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  Button,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -16,8 +23,8 @@ const Container = styled.View`
 `;
 
 const StyledText = styled.Text`
-    font-size: 30px;
-    color: #111111;
+  font-size: 30px;
+  color: #111111;
 `;
 class MainScreen extends React.Component {
   constructor(props) {
@@ -29,21 +36,19 @@ class MainScreen extends React.Component {
 
   state = {
     image: null,
-    photo: null,
   };
 
   //1. 이미지 선택
   _pickImage = async () => {
     // const {status_roll} = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
     let result = await ImagePicker.launchImageLibraryAsync({
-      // mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
     });
     if (!result.cancelled) {
-      this.setState({ photo: result });
       this.setState({ image: result.uri });
       console.log(result);
-      alert("이미지 선택 완료!");
+      alert('이미지 선택 완료!');
     }
   };
 
@@ -54,23 +59,23 @@ class MainScreen extends React.Component {
     if (this.state.image !== null) {
       //FormData 처리
       const formData = new FormData();
-      formData.append("image", {
+      formData.append('image', {
         name: this.state.image,
         uri: this.state.image,
-        type: "image/jpeg",
+        type: 'image/jpeg',
       });
       console.log(formData);
 
       //Post 처리
       await axios
-        .post("http://172.22.218.143:333/img_trans", formData, {
+        .post('http://10.200.14.171:333/img_trans', formData, {
           headers: {
-            enctype: "multipart/form-data",
+            enctype: 'multipart/form-data',
           },
         })
         .then((res) => {
           console.log(res);
-          alert("Upload success!");
+          alert('Upload success!');
           const res_img = res.data;
           // console.log(res_img);
           this.setState({
@@ -80,16 +85,16 @@ class MainScreen extends React.Component {
         })
         .catch((error) => {
           console.log(error);
-          alert("Upload failed!");
+          alert('Upload failed!');
         });
     }
   };
 
   render() {
-    const { photo } = this.state;
+    const { image } = this.state;
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <MaterialIcons name="add-a-photo" size={40} color="black" />
+      <Container>
+        <MaterialIcons name='add-a-photo' size={40} color='black' />
         <Text style={styles.text1}></Text>
         <Text style={styles.text1}>Upload</Text>
         <Text style={styles.text1}>Your</Text>
@@ -101,76 +106,70 @@ class MainScreen extends React.Component {
         <Text style={styles.text2}>멋진작품을 만들어보세요</Text>
         <Text style={styles.text1}></Text>
 
-        <View>
-          {photo && (
-            <React.Fragment>
-              {/* 이미지 확인용 */}
-              {/* <Image
-                source={{ uri: photo.uri }}
-                style={{ width: 300, height: 300 }}
-              /> */}
-              <Button title="Upload to the server" onPress={this.post} />
-            </React.Fragment>
-          )}
+        <TouchableHighlight onPress={this._pickImage} style={styles.button}>
+          <View style={styles.btnContainer}>
+            <Text style={styles.btnText}>Select Image</Text>
+          </View>
+        </TouchableHighlight>
 
-          <TouchableHighlight onPress={this._pickImage} style={styles.button}>
-            <View style={styles.btnContainer}>
-              <Text style={styles.btnText}>Select Image</Text>
-            </View>
-          </TouchableHighlight>
-        </View>
+        <Text style={styles.text1}></Text>
+        <TouchableHighlight onPress={this.post} style={styles.button}>
+          <View style={styles.btnContainer}>
+            <Text style={styles.btnText}>Upload to the server</Text>
+          </View>
+        </TouchableHighlight>
 
         <Text style={styles.text1}></Text>
         <TouchableHighlight
           onPress={() =>
-            this.props.navigation.navigate("Test", {
+            this.props.navigation.navigate('Test', {
               url: this.state.image,
             })
           }
           style={styles.button}
         >
           <View style={styles.btnContainer}>
-            <Text style={styles.btnText}>Upload</Text>
+            <Text style={styles.btnText}>Navigate to next page</Text>
           </View>
         </TouchableHighlight>
-      </View>
-        );
-      }
-};
+      </Container>
+    );
+  }
+}
 const styles = StyleSheet.create({
-    container: {
-      width: "100%",
-      height: 600,
-      backgroundColor: '#FFFFFF',
-      alignItems: 'center',
-    },
-  
-    text1: {
-      textAlign: 'left',
-      fontWeight: 'bold',
-      fontSize: 30,
-    },
-    text2: {
-      textAlign: 'left',
-      fontSize: 15,
-    },
-    btnContainer: {
-      backgroundColor: '#000000',
-      paddingHorizontal: 50,
-      paddingVertical: 10,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: 10
-    },
-    button: {
-      borderRadius: 5
-    },
-    btnText: {
-      textAlign: 'center',
-      fontWeight: 'bold',
-      fontSize: 16,
-      color: 'white'
-    }
-  });
+  container: {
+    width: '100%',
+    height: 600,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+  },
+
+  text1: {
+    textAlign: 'left',
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  text2: {
+    textAlign: 'left',
+    fontSize: 15,
+  },
+  btnContainer: {
+    backgroundColor: '#000000',
+    paddingHorizontal: 50,
+    paddingVertical: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  button: {
+    borderRadius: 5,
+  },
+  btnText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: 'white',
+  },
+});
 export default MainScreen;
