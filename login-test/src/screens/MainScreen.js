@@ -14,6 +14,8 @@ import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios';
 import Test from './Test';
+import { Buffer } from 'buffer';
+
 const Container = styled.View`
   flex: 1;
   justify-content: center;
@@ -47,6 +49,7 @@ class MainScreen extends React.Component {
     });
     if (!result.cancelled) {
       this.setState({ image: result.uri });
+      this.setState({ photo: result });
       console.log(result);
       alert('이미지 선택 완료!');
     }
@@ -54,7 +57,7 @@ class MainScreen extends React.Component {
 
   //2. flask에게 이미지 보내기
   post = async () => {
-    console.log(this.state.image);
+    // console.log(this.state.image);
 
     if (this.state.image !== null) {
       //FormData 처리
@@ -64,25 +67,34 @@ class MainScreen extends React.Component {
         uri: this.state.image,
         type: 'image/jpeg',
       });
-      console.log(formData);
+      // console.log(formData);
 
       //Post 처리
       await axios
-        .post('http://10.200.14.171:333/img_trans', formData, {
+        .post('http://192.168.0.26:333/img_trans', formData, {
           headers: {
             enctype: 'multipart/form-data',
           },
+          responseType: 'arraybuffer',
         })
         .then((res) => {
+          console.log('==============then===============');
           console.log(res);
           alert('Upload success!');
-          const res_img = res.data;
-          // console.log(res_img);
-          this.setState({
-            ImageLinks: res_img,
-            ResultImage: res,
-          });
+
+          // const blob = res.blob();
+          // const url = URL.createObjectURL(blob);
+          // this.setState({
+          //   image: url,
+          // });
+          // console.log(this.state.image);
+
+          const prefix = 'data:' + res.headers['enctype'] + ';base64,';
+          const file = Buffer.from(res.data, 'binary').toString('base64');
+          this.setState({ photo: prefix + file });
+          return prefix + file;
         })
+
         .catch((error) => {
           console.log(error);
           alert('Upload failed!');
@@ -92,6 +104,7 @@ class MainScreen extends React.Component {
 
   render() {
     const { image } = this.state;
+    const { photo } = this.state;
     return (
       <Container>
         <MaterialIcons name='add-a-photo' size={40} color='black' />
@@ -105,6 +118,16 @@ class MainScreen extends React.Component {
         <Text style={styles.text2}>라인드로잉으로 변환해드립니다</Text>
         <Text style={styles.text2}>멋진작품을 만들어보세요</Text>
         <Text style={styles.text1}></Text>
+
+        {/* test */}
+        {photo && (
+          <React.Fragment>
+            <Image
+              source={{ uri: photo.uri }}
+              style={{ width: 200, height: 200 }}
+            />
+          </React.Fragment>
+        )}
 
         <TouchableHighlight onPress={this._pickImage} style={styles.button}>
           <View style={styles.btnContainer}>
