@@ -1,37 +1,21 @@
 import React from 'react';
-import {View, Image, Button, StyleSheet} from "react-native" ;
+import styled from 'styled-components/native';
+import {Button} from '../components';
 
-import CardCompent from '../components';
+const Container = styled.View`
+    flex: 1;
+    background-color: ${({theme}) => theme.background};
+`;
 
-class Instagram extends React.Component{
+const Instagram = () => {
 
-    static navigationOptions = {
-        title:"Instagram",
-    }
-
-    render(){
-        return (
-            <View>
-                <Text>
-                    Hi
-                </Text>
-            </View>
-        );
-    }
-
-}
-
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    backgroundColor: 'white',
-  },
-
-  //text: {
-  //  textAlign: 'center',
-  //  fontSize: 22,
-  //  fontWeight: 'bold',
-  //}
-});
+    return (
+        <Container>
+            <Button
+                title="instagram"
+            />
+        </Container>
+    );
+};
 
 export default Instagram;
