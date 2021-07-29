@@ -48,9 +48,11 @@ class MainScreen extends React.Component {
       allowsEditing: true,
     });
     if (!result.cancelled) {
+      //기존에 사용할 state - image
       this.setState({ image: result.uri });
+      //test용 setState - photo
       this.setState({ photo: result });
-      console.log(result);
+      //console.log(result);
       alert('이미지 선택 완료!');
     }
   };
@@ -75,24 +77,21 @@ class MainScreen extends React.Component {
           headers: {
             enctype: 'multipart/form-data',
           },
-          responseType: 'arraybuffer',
+          // responseType: 'arraybuffer',
         })
         .then((res) => {
-          console.log('==============then===============');
-          console.log(res);
+          // console.log(res);
           alert('Upload success!');
 
-          // const blob = res.blob();
-          // const url = URL.createObjectURL(blob);
-          // this.setState({
-          //   image: url,
-          // });
-          // console.log(this.state.image);
+          // const prefix = 'data:' + res.headers['enctype'] + ';base64,';
+          // const file = Buffer.from(res.data, 'binary').toString('base64');
+          // const prefix = 'data:' + 'image/jpeg' + ';base64,';
 
-          const prefix = 'data:' + res.headers['enctype'] + ';base64,';
-          const file = Buffer.from(res.data, 'binary').toString('base64');
-          this.setState({ photo: prefix + file });
-          return prefix + file;
+          // test용 - photo
+          this.setState({ photo: res });
+          console.log(res.data);
+
+          // return prefix + file;
         })
 
         .catch((error) => {
@@ -104,6 +103,7 @@ class MainScreen extends React.Component {
 
   render() {
     const { image } = this.state;
+    //test용 - photo
     const { photo } = this.state;
     return (
       <Container>
@@ -123,7 +123,7 @@ class MainScreen extends React.Component {
         {photo && (
           <React.Fragment>
             <Image
-              source={{ uri: photo.uri }}
+              source={{ uri: photo.data }}
               style={{ width: 200, height: 200 }}
             />
           </React.Fragment>
