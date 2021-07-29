@@ -73,7 +73,7 @@ class MainScreen extends React.Component {
 
       //Post 처리
       await axios
-        .post('http://192.168.0.26:333/img_trans', formData, {
+        .post('http://10.200.15.194:333/img_trans', formData, {
           headers: {
             enctype: 'multipart/form-data',
           },
@@ -83,15 +83,10 @@ class MainScreen extends React.Component {
           // console.log(res);
           alert('Upload success!');
 
-          // const prefix = 'data:' + res.headers['enctype'] + ';base64,';
-          // const file = Buffer.from(res.data, 'binary').toString('base64');
-          // const prefix = 'data:' + 'image/jpeg' + ';base64,';
-
           // test용 - photo
           this.setState({ photo: res });
+          this.setState({ image: res });
           console.log(res.data);
-
-          // return prefix + file;
         })
 
         .catch((error) => {
@@ -120,14 +115,14 @@ class MainScreen extends React.Component {
         <Text style={styles.text1}></Text>
 
         {/* test */}
-        {photo && (
+        {/* {photo && (
           <React.Fragment>
             <Image
               source={{ uri: photo.data }}
               style={{ width: 200, height: 200 }}
             />
           </React.Fragment>
-        )}
+        )} */}
 
         <TouchableHighlight onPress={this._pickImage} style={styles.button}>
           <View style={styles.btnContainer}>
