@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { Button, ErrorMessage, Image, Input } from '../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { signup } from '../firebase';
+import { View, Text, StyleSheet} from 'react-native';
 import { Alert } from 'react-native';
 import { validateEmail, removeWhitespace } from '../utils';
 import { UserContext, ProgressContext } from '../contexts';
-
+import { TouchableHighlight } from 'react-native-gesture-handler';
 const Container = styled.View`
   flex: 1;
   justify-content: center;
@@ -125,11 +126,61 @@ const Signup = ({navigation}) => {
                 onBlur = {() => setPasswordConfirm(removeWhitespace(passwordConfirm))}
             />
             <ErrorMessage message={errorMessage} />
-            <Button title="sign up" onPress={_handleSignupBtnPress} disabled={disabled} />
+            <TouchableHighlight disabled={false} onPress={_handleSignupBtnPress} style={styles.button} >
+          <View style={styles.btnContainer}>
+            <Text style={styles.btnText}>SIGN UP COMPLETE</Text>
+          </View>
+        </TouchableHighlight>
             
         </Container>
         </KeyboardAwareScrollView>
     );
 };
+
+const styles = StyleSheet.create({
+    container2: {
+      width: '100%',
+      height: 600,
+      backgroundColor: '#FFFFFF',
+      alignItems: 'center',
+    },
+    text1: {
+      textAlign: 'left',
+      fontWeight: 'bold',
+      fontSize: 30,
+    },
+    imagebg: {
+      width: "100%",
+      height: "100%",
+    },
+    text2: {
+      textAlign: 'left',
+      color:'#C7C6C1',
+      fontSize: 25,
+      fontWeight: 'bold',
+    },
+    btnContainer: {
+      justifyContent: 'center',
+      backgroundColor: '#F2B8C6',
+      paddingHorizontal: 50,
+      paddingVertical: 10,
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 10,
+      borderRadius: 8,
+      justifyContent: 'center',
+      width:330
+  
+    },
+    button: {
+      borderRadius: 5,
+    },
+    btnText: {
+      textAlign: 'center',
+      fontWeight: 'bold',
+      fontSize: 17,
+      color: 'white',
+    },
+  });
 
 export default Signup;

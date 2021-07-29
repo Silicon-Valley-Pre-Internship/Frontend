@@ -1,7 +1,7 @@
 
 import React, {useContext} from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
-import { Signin, Signup, MainScreen, Background, Mypage, Profile, Instagram } from "../screens";
+import { Signin, Signup, MainScreen, Background, Mypage, Profile, Instagram, Test } from "../screens";
 import { Button } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -98,6 +98,7 @@ const Auth = () => {
              ),
            }}
         />
+        <Stack.Screen name="Test" component={Test} />
         </Stack.Navigator>
     );
 

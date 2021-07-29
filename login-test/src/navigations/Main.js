@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { MainScreen, Profile } from '../screens';
+import { MainScreen, Profile, Test } from '../screens';
 import { Auth } from './Auth';
 const Stack = createStackNavigator();
 
@@ -20,6 +20,7 @@ const Main = () => {
       <Stack.Screen name="Welcome Linist" component={MainTab} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="MainScreen" component={MainScreen}/>
+      <Stack.Screen name="Test" component={Test} />
     </Stack.Navigator>
   );
 };
