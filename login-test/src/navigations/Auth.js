@@ -1,7 +1,7 @@
 
 import React, {useContext} from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
-import { Signin, Signup, MainScreen, Background, Mypage, Profile } from "../screens";
+import { Signin, Signup, MainScreen, Background, Mypage, Profile, Instagram } from "../screens";
 import { Button } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -42,7 +42,7 @@ MainTab = () => {
         }}
       />
       <Tab.Screen name="MyPage" component={Mypage} />
-      <Tab.Screen name="Instagram" component={Background} />
+      <Tab.Screen name="Instagram" component={Instagram} />
     </Tab.Navigator>
   );
 };
@@ -85,6 +85,7 @@ const Auth = () => {
                 component={Profile}
             />
             <Stack.Screen name="MainScreen" component={MainScreen} />
+            <Stack.Screen name="Instagram" component={Instagram} />
             <Stack.Screen name="Background"
               component={Background} 
               options={{
