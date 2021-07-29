@@ -23,23 +23,34 @@ const StyledText = styled.Text`
 `;
 
 var images = [
-  require("../assets/1.png"),
-  require("../assets/2.png"),
-  require("../assets/3.png"),
-  require("../assets/4.png"),
-  require("../assets/5.png"),
-  require("../assets/6.png"),
-  require("../assets/7.png"),
-  require("../assets/8.png"),
-  require("../assets/9.png"),
-  require("../assets/10.png"),
-  require("../assets/11.png"),
-  require("../assets/12.png"),
+  require("../assets/a1.png"),
+  require("../assets/a2.png"),
+  require("../assets/a3.png"),
+  require("../assets/a4.png"),
+  require("../assets/a5.png"),
+  require("../assets/a6.png"),
+  require("../assets/a7.png"),
+  require("../assets/a8.png"),
+  require("../assets/a9.png"),
+  require("../assets/a10.png"),
+  require("../assets/a11.png"),
+  require("../assets/a12.png"),
 ];
 
 var { width, height } = Dimensions.get("window");
 
 class Mypage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      url: '',
+    };
+  }
+
+  state = {
+    image: null,
+  };
   renderSectionOne = () => {
     return images.map((image, index) => {
       return (
@@ -75,9 +86,10 @@ class Mypage extends React.Component {
     );
   };
 
-  clickImage = () => {
-    alert("clicked an image!");
-  };
+  clickImage = () =>
+  this.props.navigation.navigate('Test', {
+    url: this.state.image,
+  });
 
   render() {
     return (
@@ -87,15 +99,16 @@ class Mypage extends React.Component {
             fontSize: 20,
             marginTop: 10,
             marginLeft: 20,
+            fontWeight: 'bold',
           }}
         >
-          양유진 님
+          Linist 님
         </Text>
 
         <View style={{ flexDirection: "row", marginTop: 10 }}>
           <View style={{ flex: 1, alignItems: "center", marginLeft: 20 }}>
             <Image
-              source={require("../assets/profile1.png")}
+              source={require("../assets/2.png")}
               style={{ width: 75, height: 75, borderRadius: 37.5 }}
             />
           </View>
@@ -107,11 +120,11 @@ class Mypage extends React.Component {
               }}
             >
               <View style={{ alignItems: "center" }}>
-                <Text style={{ fontSize: 15, color: "gray" }}>게시물</Text>
+                <Text style={{ fontSize: 15, color: "gray", fontWeight:'bold' }}>Posts</Text>
                 <Text style={{ fontSize: 25 }}>212</Text>
               </View>
               <View style={{ alignItems: "center" }}>
-                <Text style={{ fontSize: 15, color: "gray" }}>친구</Text>
+                <Text style={{ fontSize: 15, color: "gray", fontWeight: 'bold' }}>Follower</Text>
                 <Text style={{ fontSize: 25 }}>17</Text>
               </View>
             </View>
@@ -123,9 +136,9 @@ class Mypage extends React.Component {
             <View style={styles.btnContainer}>
               <Text
                 style={styles.btnText}
-                onPress={() => Alert.alert("프로필 편집")}
+                onPress={() => Alert.alert("Edit Profile")}
               >
-                프로필 편집
+                Edit Profile
               </Text>
             </View>
           </TouchableHighlight>
@@ -133,9 +146,9 @@ class Mypage extends React.Component {
             <View style={styles.btnContainer}>
               <Text
                 style={styles.btnText}
-                onPress={() => Alert.alert("새 게시물")}
+                onPress={() => Alert.alert("New Posts")}
               >
-                새 게시물
+                New Posts
               </Text>
             </View>
           </TouchableHighlight>
