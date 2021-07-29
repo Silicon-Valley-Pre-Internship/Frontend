@@ -6,6 +6,8 @@ import {
     Image
 } from "react-native";
 
+import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon } from 'native-base'
+
 class CardComponent extends Component {
 
     render() {
@@ -23,8 +25,8 @@ class CardComponent extends Component {
                     <Left>
                         <Thumbnail source={require('../assets/me.png')} />
                         <Body>
-                            <Text>Varun </Text>
-                            <Text note>Jan 15, 2018</Text>
+                            <Text>Yellme </Text>
+                            <Text note>July 29, 2021</Text>
                         </Body>
                     </Left>
                 </CardItem>
@@ -53,9 +55,9 @@ class CardComponent extends Component {
                 <CardItem>
                     <Body>
                         <Text>
-                            <Text style={{ fontWeight: "900" }}>varun
+                            <Text style={{ fontWeight: "900" }}>yellme
                             </Text>
-                            Ea do Lorem occaecat laborum do. Minim ullamco ipsum minim eiusmod dolore cupidatat magna exercitation amet proident qui. Est do irure magna dolor adipisicing do quis labore excepteur. Commodo veniam dolore cupidatat nulla consectetur do nostrud ea cupidatat ullamco labore. Consequat ullamco nulla ullamco minim.
+                            card explanation
                         </Text>
                     </Body>
                 </CardItem>
