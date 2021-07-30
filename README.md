@@ -14,6 +14,21 @@ npm i styled-components prop-types @react-navigation/native
 ```
 npm i @react-navigation/stack
 ```
+```
+npm i @react-navigation/bottom-tabs
+```
+```
+npm i react-native-keyboard-aware-scroll-view
+```
+```
+npm i axios
+```
+```
+npm install native-base
+```
+```
+npm i styled-system
+```
 
 ## cmd install
 
@@ -25,4 +40,7 @@ expo install react-native-gesture-handler react-native-reanimated react-native-s
 ```
 ```
 expo install firebase
+```
+```
+expo install react-native-svg
 ```
